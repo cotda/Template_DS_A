@@ -1,0 +1,51 @@
+#include<iostream>
+using namespace std;
+struct Node {
+	int data;
+	Node* pLeft;
+	Node* pRight;
+};
+
+void InitTree(Node*& T) {
+	T = NULL;
+}
+
+void makeTree(Node*& t, int& x) {
+	if (t == NULL) {
+		Node* p = new Node;
+		p->data = x;
+		p->pLeft = NULL;
+		p->pRight = NULL;
+		t = p;
+	}
+	else {
+		if (t->data > x) {
+			makeTree(t->pLeft, x);
+		}
+		else if (t->data < x) {
+			makeTree(t->pRight, x);
+		}
+	}
+}
+
+void printTree(Node* t) {
+	if (t != NULL) {
+		cout << t->data<<" ";
+		printTree(t->pLeft);
+		printTree(t->pRight);
+	}
+	
+}
+int main() {
+	int n,x;
+	cin >> n;
+	Node* Tree = new Node;
+	InitTree(Tree);
+	for (int i = 0; i < n; i++) {
+		cin >> x;
+		makeTree(Tree, x);
+	}
+
+		printTree(Tree);
+	return 0;
+}
