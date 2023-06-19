@@ -67,6 +67,23 @@ void deleteNode(Node*& tree, int data) {
 	
 }
 
+bool _find(Node*& t, int& data) {
+	if (t == NULL) {
+		return false;
+	}
+	else {
+		if (t->data > data) {
+			return _find(t->pLeft, data);
+		}
+		else if (t->data < data) {
+			return _find(t->pRight, data);
+		}
+		else {
+			return true;
+		}
+	}
+}
+
 void printTree(Node*& t) {
 	if (t != NULL) {
 		cout << t->data << " ";
