@@ -1,0 +1,61 @@
+struct _Node {
+	int data;
+	_Node* next;
+};
+
+struct Queue {
+public:
+	_Node* front;
+	_Node* rear;
+
+public:
+	Queue() {
+		front = nullptr;
+		rear = nullptr;
+	}
+
+	void enqueue(int value) {
+		_Node* newNode = new _Node;
+		newNode->data = value;
+		newNode->next = nullptr;
+
+		if (isEmpty()) {
+			front = newNode;
+			rear = newNode;
+		}
+		else {
+			rear->next = newNode;
+			rear = newNode;
+		}
+	}
+	void dequeue() {
+		if (isEmpty()) {
+			return;
+		}
+
+		_Node* temp = front;
+		front = front->next;
+		if (front == nullptr) {
+			rear = nullptr;
+		}
+		delete temp;
+	}
+	int getFront() {
+		if (isEmpty()) {
+			return -1; 
+		}
+		return front->data;
+	}
+	bool isEmpty() {
+		return front == nullptr;
+	}
+};
+
+void printQueue(Queue& queue) {
+	while (!queue.isEmpty()) {
+		int frontValue = queue.getFront();
+		std::cout << frontValue << endl;
+		queue.dequeue();
+	}
+	std::cout << std::endl;
+}
